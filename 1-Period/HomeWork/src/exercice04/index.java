@@ -4,6 +4,8 @@
  */
 package exercice04;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author delanhese
@@ -15,6 +17,10 @@ public class index extends javax.swing.JFrame {
      */
     public index() {
         initComponents();
+        populationValue.setText("214.300.000");
+        ufName.setText("BR");
+        capitalName.setText("Brasília");
+        setFlagImage("brasil");
     }
 
     /**
@@ -67,18 +73,19 @@ public class index extends javax.swing.JFrame {
 
         populationValue.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
 
+        image.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        image.setPreferredSize(new java.awt.Dimension(300, 210));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addContainerGap()
+                    .addComponent(jLabel2)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addComponent(jLabel5)
@@ -93,11 +100,9 @@ public class index extends javax.swing.JFrame {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(ufName))
                                 .addComponent(options, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(image, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGap(192, 192, 192)
-                            .addComponent(jLabel1))))
+                            .addGap(45, 45, 45)
+                            .addComponent(image, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel1)))
                 .addContainerGap(47, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -123,187 +128,193 @@ public class index extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(populationValue)))
-                    .addComponent(image, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(26, Short.MAX_VALUE))
+                    .addComponent(image, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void setFlagImage(String stateName) {
+        String pathImage = "assets/" + stateName + ".png";
+        ImageIcon imageIcon = new ImageIcon(getClass().getResource(pathImage));
+        image.setIcon(imageIcon);
+    }
+
     private void optionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optionsActionPerformed
 
         Integer selectedOption = options.getSelectedIndex();
-        image.setText(String.valueOf(selectedOption));
 
         switch (selectedOption) {
             case 1:
                 populationValue.setText("790.101");
                 ufName.setText("AC");
                 capitalName.setText("Rio Braco");
-                image.setText("Acre");
+                setFlagImage("acre");
                 break;
             case 2:
                 populationValue.setText("3.322.000");
                 ufName.setText("AL");
                 capitalName.setText("Maceió");
-                image.setText("Alagoas");
+                setFlagImage("alagoas");
                 break;
             case 3:
                 populationValue.setText("751.000");
                 ufName.setText("AP");
                 capitalName.setText("Macapá");
-                image.setText("Amapá");
+                setFlagImage("amapa");
                 break;
             case 4:
                 populationValue.setText("3.874.000");
                 ufName.setText("AM");
                 capitalName.setText("Manaus");
-                image.setText("Amazonas");
+                setFlagImage("amazonas");
                 break;
             case 5:
                 populationValue.setText("14.700.000");
                 ufName.setText("BA");
                 capitalName.setText("Salvador");
-                image.setText("Bahia");
+                setFlagImage("bahia");
                 break;
             case 6:
                 populationValue.setText("8.936.431");
                 ufName.setText("CE");
                 capitalName.setText("Fortaleza");
-                image.setText("Ceará");
+                setFlagImage("ceara");
                 break;
             case 7:
                 populationValue.setText("2.923.369");
                 ufName.setText("DF");
                 capitalName.setText("Brasília");
-                image.setText("Distrito Federal");
+                setFlagImage("distrito_federal");
                 break;
             case 8:
                 populationValue.setText("3.885.000");
                 ufName.setText("ES");
                 capitalName.setText("Vitória");
-                image.setText("Espirito Santo");
+                setFlagImage("espirito_santo");
                 break;
             case 9:
                 populationValue.setText("6.523.000");
                 ufName.setText("GO");
                 capitalName.setText("Goiânia");
-                image.setText("Goiás");
+                setFlagImage("goias");
                 break;
             case 10:
                 populationValue.setText("6.523.000");
                 ufName.setText("MA");
                 capitalName.setText("São Luíz");
-                image.setText("Maranhão");
+                setFlagImage("maranhao");
                 break;
             case 11:
                 populationValue.setText("3.224.000");
                 ufName.setText("MT");
                 capitalName.setText("Corumba");
-                image.setText("Mato Grosso");
+                setFlagImage("mato_grosso");
                 break;
             case 12:
                 populationValue.setText("2.620.000");
                 ufName.setText("MS");
                 capitalName.setText("Campo Grande");
-                image.setText("Mato Grosso do Sul");
+                setFlagImage("mato_grosso_do_sul");
                 break;
             case 13:
                 populationValue.setText("20.870.000");
                 ufName.setText("MG");
                 capitalName.setText("Belo Horizonte");
-                image.setText("Minas Gerais");
+                setFlagImage("minas_gerais");
                 break;
             case 14:
                 populationValue.setText("8.074.000");
                 ufName.setText("PA");
                 capitalName.setText("Belém");
-                image.setText("Pará");
+                setFlagImage("para");
                 break;
             case 15:
                 populationValue.setText("3.944.000");
                 ufName.setText("PB");
                 capitalName.setText("João Pessoa");
-                image.setText("Paraíba");
+                setFlagImage("paraiba");
                 break;
             case 16:
                 populationValue.setText("11.080.000");
                 ufName.setText("PR");
                 capitalName.setText("Curitiba");
-                image.setText("Paraná");
+                setFlagImage("parana");
                 break;
             case 17:
                 populationValue.setText("9.278.000");
                 ufName.setText("PE");
                 capitalName.setText("Recife");
-                image.setText("Pernambuco");
+                setFlagImage("pernambuco");
                 break;
             case 18:
                 populationValue.setText("3.195.000");
                 ufName.setText("PI");
                 capitalName.setText("Teresina");
-                image.setText("Piauí");
+                setFlagImage("piaui");
                 break;
             case 19:
                 populationValue.setText("16.460.000");
                 ufName.setText("RJ");
                 capitalName.setText("Rio de Janeiro");
-                image.setText("Rio de Janeiro");
+                setFlagImage("rio_de_janeiro");
                 break;
             case 20:
                 populationValue.setText("3.409.000");
                 ufName.setText("RN");
                 capitalName.setText("Natal");
-                image.setText("Rio Grande do Norte");
+                setFlagImage("rio_grande_do_norte");
                 break;
             case 21:
                 populationValue.setText("11.290.000");
                 ufName.setText("RS");
                 capitalName.setText("Porto Alegre");
-                image.setText("Rio Grande do Sul");
+                setFlagImage("rio_grande_do_sul");
                 break;
             case 22:
                 populationValue.setText("1.749.000");
                 ufName.setText("RN");
                 capitalName.setText("Porto Velho");
-                image.setText("Rondônia");
+                setFlagImage("rondonia");
                 break;
             case 23:
                 populationValue.setText("496.396");
                 ufName.setText("RO");
                 capitalName.setText("Boa Vista");
-                image.setText("Roraima");
+                setFlagImage("roraima");
                 break;
             case 24:
                 populationValue.setText("7.165.000");
                 ufName.setText("SC");
                 capitalName.setText("Florianópolis");
-                image.setText("Santa Catarina");
+                setFlagImage("santa_catarina");
                 break;
             case 25:
                 populationValue.setText("12.333.000");
                 ufName.setText("SP");
                 capitalName.setText("São Paulo");
-                image.setText("São Paulo");
+                setFlagImage("sao_paulo");
                 break;
             case 26:
                 populationValue.setText("2.220.000");
                 ufName.setText("SE");
                 capitalName.setText("Aracajú");
-                image.setText("Sergipe");
+                setFlagImage("sergipe");
                 break;
             case 27:
                 populationValue.setText("1.497.000");
                 ufName.setText("TO");
                 capitalName.setText("Palmas");
-                image.setText("Tocantins");
+                setFlagImage("tocantins");
                 break;
             default:
-                populationValue.setText("");
-                ufName.setText("");
-                capitalName.setText("");
-                image.setText("");
+                populationValue.setText("214.300.000");
+                ufName.setText("BR");
+                capitalName.setText("Brasília");
+                setFlagImage("brasil");
+
         }
         // TODO add your handling code here:
     }//GEN-LAST:event_optionsActionPerformed
