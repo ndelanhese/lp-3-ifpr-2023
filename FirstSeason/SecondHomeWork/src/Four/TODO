@@ -1,0 +1,6 @@
+Memory game
+
+4) Jogo da Memória
+- Matriz 4x4 (pode ser de números ou qualquer outro valor que quiser para memorizar)
+- Ao "adivinhar" todos os campos, o jogo deve mostrar quem foi o vencedor , jogador 1 ou jogador 2
+ (quem foi que acertou mais duplas). Mostrar se houver empate.
