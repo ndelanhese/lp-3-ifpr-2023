@@ -12,6 +12,7 @@ public class index extends javax.swing.JFrame {
     String wordArray[] = word.split("");
     int currentPosition = 0;
     String gameWord[] = new String[wordArray.length];
+    int lives = 7;
 
     public index() {
         initComponents();
@@ -21,9 +22,23 @@ public class index extends javax.swing.JFrame {
         if (currentPosition >= wordArray.length) {
             return;
         }
-        gameWord[currentPosition] = key;
+        boolean found = false;
+        for (int i = 0; i < wordArray.length; i++) {
+            if (wordArray[i].equalsIgnoreCase(key)) {
+                gameWord[i] = key;
+                found = true;
+            }
+        }
+        if (!found) {
+            lives--;
+            updateLivesLabel();
+        }
         currentPosition++;
         setInputValue();
+    }
+
+    private void updateLivesLabel() {
+        LivesLabel.setText("Vidas restantes: " + lives);
     }
 
     private void setBackSpace() {
@@ -93,6 +108,7 @@ public class index extends javax.swing.JFrame {
         lifeFour = new javax.swing.JLabel();
         lifeFive = new javax.swing.JLabel();
         lifeSix = new javax.swing.JLabel();
+        LivesLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("HangMan Game");
@@ -435,6 +451,8 @@ public class index extends javax.swing.JFrame {
         InputSeven.setEditable(false);
         InputSeven.setPreferredSize(new java.awt.Dimension(44, 44));
 
+        LivesLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -521,17 +539,20 @@ public class index extends javax.swing.JFrame {
                                     .addComponent(ButtonBack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGap(84, 84, 84))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lifeOne, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lifeTwo)
-                        .addGap(18, 18, 18)
-                        .addComponent(lifeFive)
-                        .addGap(18, 18, 18)
-                        .addComponent(lifeSix)
-                        .addGap(18, 18, 18)
-                        .addComponent(lifeFour)
-                        .addGap(18, 18, 18)
-                        .addComponent(lifeThree)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(LivesLabel)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lifeOne, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(lifeTwo)
+                                .addGap(18, 18, 18)
+                                .addComponent(lifeFive)
+                                .addGap(18, 18, 18)
+                                .addComponent(lifeSix)
+                                .addGap(18, 18, 18)
+                                .addComponent(lifeFour)
+                                .addGap(18, 18, 18)
+                                .addComponent(lifeThree)))
                         .addGap(28, 28, 28))))
         );
 
@@ -542,7 +563,9 @@ public class index extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(55, 55, 55)
+                .addGap(30, 30, 30)
+                .addComponent(LivesLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lifeOne)
                     .addComponent(lifeTwo)
@@ -550,7 +573,7 @@ public class index extends javax.swing.JFrame {
                     .addComponent(lifeSix)
                     .addComponent(lifeFour)
                     .addComponent(lifeThree))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 302, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 321, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(InputOne, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(InputTwo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -619,9 +642,7 @@ public class index extends javax.swing.JFrame {
     }//GEN-LAST:event_ButtonHActionPerformed
 
     private void ButtonEnterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonEnterActionPerformed
-        if (currentPosition != 7) {
-            return;
-        }
+
         String userWord = String.join("", gameWord);
         if (!userWord.equals(word)) {
             JOptionPane.showMessageDialog(null, "Deu ruim pia");
@@ -793,6 +814,7 @@ public class index extends javax.swing.JFrame {
     private javax.swing.JTextField InputSix;
     private javax.swing.JTextField InputThree;
     private javax.swing.JTextField InputTwo;
+    private javax.swing.JLabel LivesLabel;
     private javax.swing.JLabel lifeFive;
     private javax.swing.JLabel lifeFour;
     private javax.swing.JLabel lifeOne;
