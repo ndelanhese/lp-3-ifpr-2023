@@ -3,11 +3,6 @@ package controlador;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-/**
- * Classe Conexao usando o padrão de projeto Singleton
- *
- * @author Marcelo Rafael Borth
- */
 public class Conexao {
 
     private static Connection conexao;
@@ -17,7 +12,7 @@ public class Conexao {
             String driver = "com.mysql.cj.jdbc.Driver";
             String url = "jdbc:mysql://127.0.0.1:3306/ifsis";
             String usuario = "root";
-            String senha = "";
+            String senha = "Nhpd1906.";
 
             Class.forName(driver);
             conexao = DriverManager.getConnection(url, usuario, senha);
