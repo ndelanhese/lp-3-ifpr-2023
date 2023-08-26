@@ -1,21 +1,21 @@
-package visao.usuario;
+package views.users;
 
-import controlador.UsuarioDao;
+import controller.userDAO;
 import javax.swing.JOptionPane;
-import modelo.Usuario;
+import models.user;
 
 /**
  *
  * @author Marcelo Borth
  */
-public class UsuarioAlterar extends javax.swing.JFrame {
+public class update extends javax.swing.JFrame {
 
-    public UsuarioGerenciar usuarioGerenciarForm;
+    public index usuarioGerenciarForm;
     
     /**
      * Creates new form UsuarioAlterar
      */
-    public UsuarioAlterar() {
+    public update() {
         initComponents();
     }
 
@@ -84,7 +84,7 @@ public class UsuarioAlterar extends javax.swing.JFrame {
                     .addGroup(jPanelDadosGeraisLayout.createSequentialGroup()
                         .addGroup(jPanelDadosGeraisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE))
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanelDadosGeraisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelDadosGeraisLayout.createSequentialGroup()
@@ -233,8 +233,8 @@ public class UsuarioAlterar extends javax.swing.JFrame {
         try {
             Integer id = Integer.parseInt(idTexto);
 
-            UsuarioDao dao = new UsuarioDao();
-            Usuario obj = dao.getUsuario(id);
+            userDAO dao = new userDAO();
+            user obj = dao.getUsuario(id);
 
             if (obj != null) {
                 //Preenche os dados do formulário
@@ -266,10 +266,10 @@ public class UsuarioAlterar extends javax.swing.JFrame {
         String nome = jTextFieldNome.getText();
         String email = jTextFieldEmail.getText();
 
-        Usuario u = new Usuario(id, nome, email, null);
+        user u = new user(id, nome, email, null);
 
         try {
-            UsuarioDao dao = new UsuarioDao();
+            userDAO dao = new userDAO();
             dao.atualizar(u);
             
             usuarioGerenciarForm.callback();
@@ -302,20 +302,21 @@ public class UsuarioAlterar extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UsuarioAlterar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(update.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(UsuarioAlterar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(update.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(UsuarioAlterar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(update.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(UsuarioAlterar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(update.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UsuarioAlterar().setVisible(true);
+                new update().setVisible(true);
             }
         });
     }

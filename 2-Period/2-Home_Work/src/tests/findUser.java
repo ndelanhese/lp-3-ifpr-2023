@@ -1,13 +1,13 @@
-package testes;
+package tests;
 
-import controlador.UsuarioDao;
-import modelo.Usuario;
+import controller.userDAO;
+import models.user;
 
-public class UsuarioBuscar {
+public class findUser {
 
     public static void main(String[] args) throws Exception {
-        UsuarioDao dao = new UsuarioDao();
-        Usuario u = dao.getUsuario(1);
+        userDAO dao = new userDAO();
+        user u = dao.getUsuario(1);
         
         System.out.println("Nome: " + u.getNome());
         System.out.println("Email: " + u.getEmail());

@@ -1,21 +1,21 @@
-package visao.usuario;
+package views.users;
 
-import controlador.UsuarioDao;
+import controller.userDAO;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import modelo.Usuario;
+import models.user;
 
 /**
  *
  * @author Marcelo Borth
  */
-public class UsuarioGerenciar extends javax.swing.JFrame {
+public class index extends javax.swing.JFrame {
 
     /**
      * Creates new form GerenciarUsuario
      */
-    public UsuarioGerenciar() {
+    public index() {
         initComponents();
 
         this.preencherTabela("");
@@ -62,6 +62,8 @@ public class UsuarioGerenciar extends javax.swing.JFrame {
                 jTextFieldPesquisarKeyReleased(evt);
             }
         });
+
+        jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jTableDados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -183,7 +185,7 @@ public class UsuarioGerenciar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoActionPerformed
-        UsuarioCadastrar uc = new UsuarioCadastrar();
+        register uc = new register();
         uc.setVisible(true);
         uc.usuarioGerenciarForm = this;
     }//GEN-LAST:event_jButtonNovoActionPerformed
@@ -206,10 +208,10 @@ public class UsuarioGerenciar extends javax.swing.JFrame {
         modelo.setNumRows(0);
 
         try {
-            UsuarioDao dao = new UsuarioDao();
-            List<Usuario> lista = dao.buscar(campoPesquisa);
+            userDAO dao = new userDAO();
+            List<user> lista = dao.buscar(campoPesquisa);
 
-            for (Usuario obj : lista) {
+            for (user obj : lista) {
                 String[] linha = {
                     obj.getId().toString(),
                     obj.getNome(),
@@ -237,7 +239,7 @@ public class UsuarioGerenciar extends javax.swing.JFrame {
 
                 try {
                     //Exclui do BD
-                    UsuarioDao dao = new UsuarioDao();
+                    userDAO dao = new userDAO();
                     dao.excluir(id);
 
                     //Remove linha da tabela
@@ -267,7 +269,7 @@ public class UsuarioGerenciar extends javax.swing.JFrame {
             Integer id = Integer.parseInt(
                     jTableDados.getModel().getValueAt(linhaSelecionada, 0).toString());
 
-            UsuarioAlterar form = new UsuarioAlterar();
+            update form = new update();
             form.setVisible(true);
             form.usuarioGerenciarForm = this;
             form.mostrarUsuario(id.toString());
@@ -299,21 +301,23 @@ public class UsuarioGerenciar extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UsuarioGerenciar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(index.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(UsuarioGerenciar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(index.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(UsuarioGerenciar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(index.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(UsuarioGerenciar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(index.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UsuarioGerenciar().setVisible(true);
+                new index().setVisible(true);
             }
         });
     }

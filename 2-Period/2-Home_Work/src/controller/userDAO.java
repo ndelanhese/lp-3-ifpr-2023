@@ -1,23 +1,23 @@
-package controlador;
+package controller;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import modelo.Usuario;
+import models.user;
 
 /**
  *
  * @author Marcelo Rafael Borth
  */
-public class UsuarioDao {
+public class userDAO {
 
-    public int inserir(Usuario u) throws Exception {
+    public int inserir(user u) throws Exception {
         int retorno;
 
         String sql = "insert into usuario (nome, email, senha)"
                 + "values (?, ?, ?)";
 
-        Connection conexao = Conexao.getConexao();
+        Connection conexao = connection.getConexao();
         try (PreparedStatement ps = conexao.prepareStatement(sql)) {
             ps.setString(1, u.getNome());
             ps.setString(2, u.getEmail());
@@ -29,8 +29,8 @@ public class UsuarioDao {
         return retorno;
     }
 
-    public List<Usuario> buscar(String nome) throws Exception {
-        Connection conexao = Conexao.getConexao();
+    public List<user> buscar(String nome) throws Exception {
+        Connection conexao = connection.getConexao();
         String sql = "select * from usuario ";
 
         if (!nome.equals("")) {
@@ -39,7 +39,7 @@ public class UsuarioDao {
 
         sql += " order by nome";
 
-        List<Usuario> lista = new ArrayList<>();
+        List<user> lista = new ArrayList<>();
 
         try (PreparedStatement ps = conexao.prepareStatement(sql)) {
             if (!nome.equals("")) {
@@ -48,7 +48,7 @@ public class UsuarioDao {
             
             try(ResultSet rs = ps.executeQuery()) {
                 while(rs.next()) {
-                    Usuario u = new Usuario();
+                    user u = new user();
                     u.setId(rs.getInt("id"));
                     u.setNome(rs.getString("nome"));
                     u.setEmail(rs.getString("email"));
@@ -62,11 +62,11 @@ public class UsuarioDao {
         return lista;
     }
 
-    public Usuario getUsuario(int id) throws Exception {
-        Connection conexao = Conexao.getConexao();
+    public user getUsuario(int id) throws Exception {
+        Connection conexao = connection.getConexao();
         String sql = "select * from usuario where id = ?";
 
-        Usuario obj = null;
+        user obj = null;
 
         try (PreparedStatement ps = conexao.prepareStatement(sql)) {
             //Parâmetros da SQL (pode ser mais de 1 param)
@@ -74,7 +74,7 @@ public class UsuarioDao {
 
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    obj = new Usuario();
+                    obj = new user();
                     obj.setId(rs.getInt("id"));
                     obj.setNome(rs.getString("nome"));
                     obj.setEmail(rs.getString("email"));
@@ -87,7 +87,7 @@ public class UsuarioDao {
         return obj;
     }
 
-    public int atualizar(Usuario u) throws Exception {
+    public int atualizar(user u) throws Exception {
         int retorno;
 
         String sql = "update usuario"
@@ -95,7 +95,7 @@ public class UsuarioDao {
                 + "          email = ?"
                 + "    where id    = ?";
 
-        Connection conexao = Conexao.getConexao();
+        Connection conexao = connection.getConexao();
         try (PreparedStatement ps = conexao.prepareStatement(sql)) {
             ps.setString(1, u.getNome());
             ps.setString(2, u.getEmail());
@@ -110,7 +110,7 @@ public class UsuarioDao {
     public void excluir(Integer id) throws Exception {
         String sql = "delete from usuario where id = ?";
 
-        Connection conexao = Conexao.getConexao();
+        Connection conexao = connection.getConexao();
         try (PreparedStatement ps = conexao.prepareStatement(sql)) {
             ps.setInt(1, id);
 

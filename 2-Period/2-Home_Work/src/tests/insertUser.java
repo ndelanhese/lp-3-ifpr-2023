@@ -1,23 +1,23 @@
-package testes;
+package tests;
 
-import controlador.UsuarioDao;
-import modelo.Usuario;
+import controller.userDAO;
+import models.user;
 
 /**
  *
  * @author Marcelo Borth
  */
-public class UsuarioInserir {
+public class insertUser {
 
     //DAO - Data Access Object
     public static void main(String[] args) {
 
         try {
-            Usuario u = new Usuario(
+            user u = new user(
                     null, "Marcelo Borth",
                     "marcelo.borth@ifpr.edu.br", "1234");
             
-            UsuarioDao dao = new UsuarioDao();
+            userDAO dao = new userDAO();
             dao.inserir(u);
             
             System.out.println("Usuário inserido com sucesso.");

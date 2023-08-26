@@ -1,20 +1,20 @@
-package modelo;
+package models;
 
 /**
  *
  * @author Marcelo Rafael Borth
  */
-public class Usuario {
+public class user {
     
     private Integer id;
     private String nome;
     private String email;
     private String senha;
 
-    public Usuario() {
+    public user() {
     }
 
-    public Usuario(Integer id, String nome, String email, String senha) {
+    public user(Integer id, String nome, String email, String senha) {
         this.id = id;
         this.nome = nome;
         this.email = email;

@@ -1,13 +1,13 @@
-package controlador;
+package controller;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-public class Conexao {
+public class connection {
 
     private static Connection conexao;
 
-    private Conexao() throws Exception {
+    private connection() throws Exception {
         try {
             String driver = "com.mysql.cj.jdbc.Driver";
             String url = "jdbc:mysql://127.0.0.1:3306/ifsis";
@@ -25,15 +25,15 @@ public class Conexao {
 
     public static Connection getConexao() throws Exception {
         if (conexao == null) {
-            new Conexao();
+            new connection();
         }
 
         return conexao;
     }
     
     public static void main(String[] args) throws Exception {
-        System.out.println(Conexao.getConexao());
-        System.out.println(Conexao.getConexao());
+        System.out.println(connection.getConexao());
+        System.out.println(connection.getConexao());
     }
     
 }

@@ -1,21 +1,21 @@
-package visao.usuario;
+package views.users;
 
-import controlador.UsuarioDao;
+import controller.userDAO;
 import javax.swing.JOptionPane;
-import modelo.Usuario;
+import models.user;
 
 /**
  *
  * @author Marcelo Borth
  */
-public class UsuarioCadastrar extends javax.swing.JFrame {
+public class register extends javax.swing.JFrame {
     
-    public UsuarioGerenciar usuarioGerenciarForm;
+    public index usuarioGerenciarForm;
     
     /**
      * Creates new form UsuarioCadastrar
      */
-    public UsuarioCadastrar() {
+    public register() {
         initComponents();
     }
 
@@ -88,7 +88,7 @@ public class UsuarioCadastrar extends javax.swing.JFrame {
                             .addComponent(jTextFieldEmail, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 98, Short.MAX_VALUE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,10 +171,10 @@ public class UsuarioCadastrar extends javax.swing.JFrame {
         }
         //Verificar se email é válido
         
-        Usuario u = new Usuario(null, nome, email, senha);
+        user u = new user(null, nome, email, senha);
         
         try {
-            UsuarioDao dao = new UsuarioDao();
+            userDAO dao = new userDAO();
             dao.inserir(u);
             
             usuarioGerenciarForm.callback();
@@ -202,20 +202,21 @@ public class UsuarioCadastrar extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UsuarioCadastrar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(register.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(UsuarioCadastrar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(register.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(UsuarioCadastrar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(register.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(UsuarioCadastrar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(register.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UsuarioCadastrar().setVisible(true);
+                new register().setVisible(true);
             }
         });
     }
