@@ -4,8 +4,6 @@
  */
 package views;
 
-import views.users.index;
-
 /**
  *
  * @author aluno
