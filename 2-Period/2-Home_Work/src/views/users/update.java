@@ -11,7 +11,7 @@ import models.user;
 public class update extends javax.swing.JFrame {
 
     public index usuarioGerenciarForm;
-    
+
     /**
      * Creates new form UsuarioAlterar
      */
@@ -38,6 +38,8 @@ public class update extends javax.swing.JFrame {
         jTextFieldEmail = new javax.swing.JTextField();
         jTextFieldID = new javax.swing.JTextField();
         jButtonSalvarDadosGerais = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        cbxStatus = new javax.swing.JComboBox<>();
         jPanelAlterarSenha = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -74,6 +76,10 @@ public class update extends javax.swing.JFrame {
             }
         });
 
+        jLabel7.setText("Status:");
+
+        cbxStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ativo", "invativo" }));
+
         javax.swing.GroupLayout jPanelDadosGeraisLayout = new javax.swing.GroupLayout(jPanelDadosGerais);
         jPanelDadosGerais.setLayout(jPanelDadosGeraisLayout);
         jPanelDadosGeraisLayout.setHorizontalGroup(
@@ -88,7 +94,7 @@ public class update extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanelDadosGeraisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelDadosGeraisLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGap(0, 19, Short.MAX_VALUE)
                                 .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanelDadosGeraisLayout.createSequentialGroup()
                                 .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -97,9 +103,13 @@ public class update extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButtonSalvarDadosGerais))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelDadosGeraisLayout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanelDadosGeraisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanelDadosGeraisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextFieldEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
+                            .addComponent(cbxStatus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         jPanelDadosGeraisLayout.setVerticalGroup(
@@ -117,7 +127,11 @@ public class update extends javax.swing.JFrame {
                 .addGroup(jPanelDadosGeraisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanelDadosGeraisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addComponent(cbxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addComponent(jButtonSalvarDadosGerais)
                 .addContainerGap())
         );
@@ -183,7 +197,7 @@ public class update extends javax.swing.JFrame {
         jPanelAlterarSenhaLayout.setVerticalGroup(
             jPanelAlterarSenhaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelAlterarSenhaLayout.createSequentialGroup()
-                .addContainerGap(48, Short.MAX_VALUE)
+                .addContainerGap(99, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonAlterarSenha)
@@ -219,13 +233,14 @@ public class update extends javax.swing.JFrame {
 
     private void jTextFieldIDFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldIDFocusLost
         String id = jTextFieldID.getText();
-        
+
         if (!id.trim().equals("")) {
             this.mostrarUsuario(id);
         } else {
             jTextFieldID.setText("");
             jTextFieldNome.setText("");
             jTextFieldEmail.setText("");
+            cbxStatus.setSelectedIndex(0);
         }
     }//GEN-LAST:event_jTextFieldIDFocusLost
 
@@ -241,11 +256,13 @@ public class update extends javax.swing.JFrame {
                 jTextFieldID.setText(obj.getId().toString());
                 jTextFieldNome.setText(obj.getNome());
                 jTextFieldEmail.setText(obj.getEmail());
+                cbxStatus.setSelectedIndex(obj.getStatus() - 1);
             } else {
                 JOptionPane.showMessageDialog(this, "Registro não encontrado.");
                 jTextFieldID.setText("");
                 jTextFieldNome.setText("");
                 jTextFieldEmail.setText("");
+                cbxStatus.setSelectedIndex(0);
                 jTextFieldID.requestFocus();
             }
         } catch (Exception e) {
@@ -253,6 +270,7 @@ public class update extends javax.swing.JFrame {
             jTextFieldID.setText("");
             jTextFieldNome.setText("");
             jTextFieldEmail.setText("");
+            cbxStatus.setSelectedIndex(0);
             jTextFieldID.requestFocus();
         }
     }
@@ -265,15 +283,17 @@ public class update extends javax.swing.JFrame {
         Integer id = Integer.valueOf(jTextFieldID.getText());
         String nome = jTextFieldNome.getText();
         String email = jTextFieldEmail.getText();
+        Integer status = cbxStatus.getSelectedIndex() + 1;
 
         user u = new user(id, nome, email, null);
+        u.setStatus(status);
 
         try {
             userDAO dao = new userDAO();
             dao.atualizar(u);
-            
+
             usuarioGerenciarForm.callback();
-            
+
             JOptionPane.showMessageDialog(this, "Registro atualizado com sucesso.");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
@@ -322,6 +342,7 @@ public class update extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cbxStatus;
     private javax.swing.JButton jButtonAlterarSenha;
     private javax.swing.JButton jButtonSalvarDadosGerais;
     private javax.swing.JLabel jLabel1;
@@ -330,6 +351,7 @@ public class update extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanelAlterarSenha;
     private javax.swing.JPanel jPanelDadosGerais;
