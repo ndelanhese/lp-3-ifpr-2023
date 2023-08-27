@@ -1,15 +1,14 @@
 package models;
 
-/**
- *
- * @author Marcelo Rafael Borth
- */
+import java.util.Date;
+
 public class user {
     
     private Integer id;
     private String nome;
     private String email;
     private String senha;
+    private Date dateRegistration;
 
     public user() {
     }
@@ -52,6 +51,13 @@ public class user {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-    
+
+    public Date getDateRegistration() {
+        return dateRegistration;
+    }
+
+    public void setDateRegistration(Date dateRegistration) {
+        this.dateRegistration = dateRegistration;
+    }
     
 }

@@ -52,6 +52,7 @@ public class userDAO {
                     u.setId(rs.getInt("id"));
                     u.setNome(rs.getString("name"));
                     u.setEmail(rs.getString("email"));
+                    u.setDateRegistration(rs.getDate("creation_date"));
                     lista.add(u);
                 }
             }

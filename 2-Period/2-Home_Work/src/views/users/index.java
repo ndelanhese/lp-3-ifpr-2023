@@ -216,7 +216,7 @@ public class index extends javax.swing.JFrame {
                     obj.getId().toString(),
                     obj.getNome(),
                     obj.getEmail(),
-                    ""
+                    obj.getDateRegistration().toString()
                 };
                 modelo.addRow(linha);
             }
