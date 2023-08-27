@@ -1,6 +1,6 @@
 package tests;
 
-import controller.userDAO;
+import DAO.userDAO;
 import models.user;
 
 /**

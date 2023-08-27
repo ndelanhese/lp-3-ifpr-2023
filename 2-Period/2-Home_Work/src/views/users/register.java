@@ -1,6 +1,6 @@
 package views.users;
 
-import controller.userDAO;
+import DAO.userDAO;
 import javax.swing.JOptionPane;
 import models.user;
 

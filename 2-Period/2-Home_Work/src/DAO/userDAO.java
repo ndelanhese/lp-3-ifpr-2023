@@ -1,5 +1,6 @@
-package controller;
+package DAO;
 
+import controller.connection;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,7 @@ public class userDAO {
         int retorno;
 
         String sql = "insert into user (name, email, password, creation_date, status)"
-                + "values (?, ?, ?, ?)";
+                + "values (?, ?, ?, ?, ?)";
 
         Connection conexao = connection.getConexao();
         try (PreparedStatement ps = conexao.prepareStatement(sql)) {
