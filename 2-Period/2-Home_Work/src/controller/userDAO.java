@@ -14,7 +14,7 @@ public class userDAO {
     public int inserir(user u) throws Exception {
         int retorno;
 
-        String sql = "insert into usuario (nome, email, senha)"
+        String sql = "insert into user (name, email, password)"
                 + "values (?, ?, ?)";
 
         Connection conexao = connection.getConexao();
@@ -31,13 +31,13 @@ public class userDAO {
 
     public List<user> buscar(String nome) throws Exception {
         Connection conexao = connection.getConexao();
-        String sql = "select * from usuario ";
+        String sql = "select * from user ";
 
         if (!nome.equals("")) {
-            sql += " where nome like ?";
+            sql += " where name like ?";
         }
 
-        sql += " order by nome";
+        sql += " order by name";
 
         List<user> lista = new ArrayList<>();
 
@@ -50,7 +50,7 @@ public class userDAO {
                 while(rs.next()) {
                     user u = new user();
                     u.setId(rs.getInt("id"));
-                    u.setNome(rs.getString("nome"));
+                    u.setNome(rs.getString("name"));
                     u.setEmail(rs.getString("email"));
                     lista.add(u);
                 }
@@ -64,7 +64,7 @@ public class userDAO {
 
     public user getUsuario(int id) throws Exception {
         Connection conexao = connection.getConexao();
-        String sql = "select * from usuario where id = ?";
+        String sql = "select * from user where id = ?";
 
         user obj = null;
 
@@ -76,7 +76,7 @@ public class userDAO {
                 if (rs.next()) {
                     obj = new user();
                     obj.setId(rs.getInt("id"));
-                    obj.setNome(rs.getString("nome"));
+                    obj.setNome(rs.getString("name"));
                     obj.setEmail(rs.getString("email"));
                 }
             }
@@ -90,8 +90,8 @@ public class userDAO {
     public int atualizar(user u) throws Exception {
         int retorno;
 
-        String sql = "update usuario"
-                + "      set nome  = ?,"
+        String sql = "update user"
+                + "      set name  = ?,"
                 + "          email = ?"
                 + "    where id    = ?";
 
@@ -108,7 +108,7 @@ public class userDAO {
     }
 
     public void excluir(Integer id) throws Exception {
-        String sql = "delete from usuario where id = ?";
+        String sql = "delete from user where id = ?";
 
         Connection conexao = connection.getConexao();
         try (PreparedStatement ps = conexao.prepareStatement(sql)) {
