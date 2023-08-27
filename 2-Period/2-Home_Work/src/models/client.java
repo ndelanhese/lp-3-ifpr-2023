@@ -17,6 +17,9 @@ public class client {
     private String observation;
     private Date registrationDate;
 
+    public client() {
+    }
+
     public client(Integer id, String name, Integer clientType, String cpfCnpj, String phone, String email, String observation) {
         this.id = id;
         this.name = name;

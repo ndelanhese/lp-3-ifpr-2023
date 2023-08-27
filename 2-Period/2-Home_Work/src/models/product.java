@@ -9,6 +9,9 @@ public class product {
     private String unitOfMeasure;
     private Date registrationDate;
 
+    public product() {
+    }
+
     public product(Integer id, String name, String unitOfMeasure) {
         this.id = id;
         this.name = name;

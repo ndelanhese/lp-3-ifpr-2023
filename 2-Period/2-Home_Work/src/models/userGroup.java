@@ -5,6 +5,9 @@ public class userGroup {
     private Integer id;
     private String name;
 
+    public userGroup() {
+    }
+
     public userGroup(Integer id, String name) {
         this.id = id;
         this.name = name;
