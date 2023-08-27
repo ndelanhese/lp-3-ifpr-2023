@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import models.user;
 
+
 /**
  *
  * @author Marcelo Rafael Borth
@@ -14,14 +15,24 @@ public class userDAO {
     public int inserir(user u) throws Exception {
         int retorno;
 
-        String sql = "insert into user (name, email, password)"
-                + "values (?, ?, ?)";
+        String sql = "insert into user (name, email, password, creation_date, status)"
+                + "values (?, ?, ?, ?)";
 
         Connection conexao = connection.getConexao();
         try (PreparedStatement ps = conexao.prepareStatement(sql)) {
+
+            java.util.Date registrationDate = u.getDateRegistration();
+            if (registrationDate == null) {
+                registrationDate = new java.util.Date();
+            }
+
+            Date sqlDate = new Date(registrationDate.getTime());
+
             ps.setString(1, u.getNome());
             ps.setString(2, u.getEmail());
             ps.setString(3, u.getSenha());
+            ps.setDate(4, sqlDate);
+            ps.setInt(5, u.getStatus());
 
             retorno = ps.executeUpdate();
         }
@@ -45,14 +56,15 @@ public class userDAO {
             if (!nome.equals("")) {
                 ps.setString(1, "%" + nome + "%");
             }
-            
-            try(ResultSet rs = ps.executeQuery()) {
-                while(rs.next()) {
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
                     user u = new user();
                     u.setId(rs.getInt("id"));
                     u.setNome(rs.getString("name"));
                     u.setEmail(rs.getString("email"));
                     u.setDateRegistration(rs.getDate("creation_date"));
+                    u.setStatus(rs.getInt("status"));
                     lista.add(u);
                 }
             }
@@ -79,6 +91,8 @@ public class userDAO {
                     obj.setId(rs.getInt("id"));
                     obj.setNome(rs.getString("name"));
                     obj.setEmail(rs.getString("email"));
+                    obj.setDateRegistration(rs.getDate("creation_date"));
+                    obj.setStatus(rs.getInt("status"));
                 }
             }
         } catch (Exception e) {
@@ -93,14 +107,16 @@ public class userDAO {
 
         String sql = "update user"
                 + "      set name  = ?,"
-                + "          email = ?"
+                + "          email = ?,"
+                + "          status = ?"
                 + "    where id    = ?";
 
         Connection conexao = connection.getConexao();
         try (PreparedStatement ps = conexao.prepareStatement(sql)) {
             ps.setString(1, u.getNome());
             ps.setString(2, u.getEmail());
-            ps.setInt(3, u.getId());
+            ps.setInt(3, u.getStatus());
+            ps.setInt(4, u.getId());
 
             retorno = ps.executeUpdate();
         }

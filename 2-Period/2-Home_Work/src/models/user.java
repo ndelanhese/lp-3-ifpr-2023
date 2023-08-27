@@ -9,6 +9,7 @@ public class user {
     private String email;
     private String senha;
     private Date dateRegistration;
+    private Integer status;
 
     public user() {
     }
@@ -18,6 +19,7 @@ public class user {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
+        this.status = 1;
     }
     
     public Integer getId() {
@@ -59,5 +61,14 @@ public class user {
     public void setDateRegistration(Date dateRegistration) {
         this.dateRegistration = dateRegistration;
     }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+    
     
 }
