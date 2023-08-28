@@ -4,18 +4,18 @@ import views.product.*;
 import views.productCategory.*;
 import views.usersGroup.*;
 import views.users.*;
-import DAO.productDAO;
+import DAO.clientDAO;
 import javax.swing.JOptionPane;
-import models.product;
+import models.client;
 
 /**
  *
  * @author Marcelo Borth
  */
 public class register extends javax.swing.JFrame {
-    
+
     public index usuarioGerenciarForm;
-    
+
     /**
      * Creates new form UsuarioCadastrar
      */
@@ -38,14 +38,22 @@ public class register extends javax.swing.JFrame {
         jButtonCadastrar = new javax.swing.JButton();
         jButtonLimpar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        txtUnitOfMeasure = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        txtCpfCnpj = new javax.swing.JTextField();
+        txtPhone = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        txtEmail = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        txtObservation = new javax.swing.JTextField();
+        cbxTypeClient = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Usuário");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Cadastro de Produtos");
+        jLabel1.setText("Cadastro de Cliente");
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Nome:");
@@ -61,7 +69,17 @@ public class register extends javax.swing.JFrame {
         jButtonLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/limpar.png"))); // NOI18N
         jButtonLimpar.setText("Limpar");
 
-        jLabel3.setText("Unidade de Medida:");
+        jLabel3.setText("Tip de Cliente");
+
+        jLabel4.setText("CPF/CNPJ:");
+
+        jLabel5.setText("Telefone:");
+
+        jLabel6.setText("Email:");
+
+        jLabel7.setText("Observação:");
+
+        cbxTypeClient.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pessoa Fisica", "Pessoa juridica" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -77,13 +95,22 @@ public class register extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonLimpar))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextFieldNome)
-                            .addComponent(txtUnitOfMeasure))))
+                            .addComponent(txtCpfCnpj)
+                            .addComponent(txtPhone)
+                            .addComponent(txtEmail)
+                            .addComponent(txtObservation)
+                            .addComponent(cbxTypeClient, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -98,12 +125,28 @@ public class register extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(txtUnitOfMeasure, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbxTypeClient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtCpfCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(txtObservation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCadastrar)
                     .addComponent(jButtonLimpar))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
@@ -111,35 +154,53 @@ public class register extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrarActionPerformed
-        
+
         String nome = jTextFieldNome.getText();
-        String unitOfMeasure = txtUnitOfMeasure.getText();
-        
+        Integer typeClient = cbxTypeClient.getSelectedIndex() + 1;
+        String cpfCnpj = txtCpfCnpj.getText();
+        String phone = txtPhone.getText();
+        String email = txtEmail.getText();
+        String observation = txtObservation.getText();
+
         //Validações
         if (nome.equals("")) {
             JOptionPane.showMessageDialog(this, "Informe o nome.");
             jTextFieldNome.requestFocus();
             return;
         }
-        if (unitOfMeasure.equals("")) {
-            JOptionPane.showMessageDialog(this, "Informe a unidade de medida.");
-            txtUnitOfMeasure.requestFocus();
+        if (cpfCnpj.equals("")) {
+            JOptionPane.showMessageDialog(this, "Informe o CPF/CNPJ.");
+            txtCpfCnpj.requestFocus();
             return;
         }
-        
-        
-        product u = new product(null, nome, unitOfMeasure);
-        
+        if (phone.equals("")) {
+            JOptionPane.showMessageDialog(this, "Informe o telefone.");
+            txtPhone.requestFocus();
+            return;
+        }
+        if (email.equals("")) {
+            JOptionPane.showMessageDialog(this, "Informe o email.");
+            txtEmail.requestFocus();
+            return;
+        }
+        if (observation.equals("")) {
+            JOptionPane.showMessageDialog(this, "Informe a observação.");
+            txtObservation.requestFocus();
+            return;
+        }
+
+        client u = new client(null, nome, typeClient, cpfCnpj, phone, email, observation);
+
         try {
-            productDAO dao = new productDAO();
+            clientDAO dao = new clientDAO();
             dao.inserir(u);
-            
+
             usuarioGerenciarForm.callback();
             JOptionPane.showMessageDialog(this, "Registro inserido com sucesso.");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
         }
-        
+
     }//GEN-LAST:event_jButtonCadastrarActionPerformed
 
     /**
@@ -209,12 +270,20 @@ public class register extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cbxTypeClient;
     private javax.swing.JButton jButtonCadastrar;
     private javax.swing.JButton jButtonLimpar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JTextField jTextFieldNome;
-    private javax.swing.JTextField txtUnitOfMeasure;
+    private javax.swing.JTextField txtCpfCnpj;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtObservation;
+    private javax.swing.JTextField txtPhone;
     // End of variables declaration//GEN-END:variables
 }

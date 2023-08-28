@@ -4,11 +4,11 @@ import views.product.*;
 import views.productCategory.*;
 import views.usersGroup.*;
 import views.users.*;
-import DAO.productDAO;
+import DAO.clientDAO;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import models.product;
+import models.client;
 
 /**
  *
@@ -49,7 +49,7 @@ public class index extends javax.swing.JFrame {
         setTitle("Gerenciar Usuário");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setText("Gerenciar Produtos");
+        jLabel1.setText("Gerenciar Clientes");
 
         jButtonNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
         jButtonNovo.setText("Novo");
@@ -74,14 +74,14 @@ public class index extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Nome", "Unidade Medida", "Data Cadastro"
+                "ID", "Nome", "Tipo Cliente", "CPF/CNPJ", "Telefone", "E-mail", "Observação", "Data cadastro"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false, true, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -197,29 +197,41 @@ public class index extends javax.swing.JFrame {
     private void jTextFieldPesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldPesquisarKeyReleased
         this.carregarTabela();
     }//GEN-LAST:event_jTextFieldPesquisarKeyReleased
-    
+
     public void callback() {
         this.carregarTabela();
     }
-    
+
     private void carregarTabela() {
         String campoPesquisa = jTextFieldPesquisar.getText();
         this.preencherTabela(campoPesquisa);
     }
-    
+
+    private String convertClientType(Integer value) {
+        if (value == 1) {
+            return "Pessoa Fisica";
+        }
+        return "Pessoa Juridica";
+    }
+
     private void preencherTabela(String campoPesquisa) {
         DefaultTableModel modelo = (DefaultTableModel) jTableDados.getModel();
         modelo.setNumRows(0);
 
         try {
-            productDAO dao = new productDAO();
-            List<product> lista = dao.buscar(campoPesquisa);
+            clientDAO dao = new clientDAO();
+            List<client> lista = dao.buscar(campoPesquisa);
 
-            for (product obj : lista) {
+            for (client obj : lista) {
                 String[] linha = {
                     obj.getId().toString(),
                     obj.getName(),
-                };
+                    convertClientType(obj.getClientType()),
+                    obj.getCpfCnpj(),
+                    obj.getPhone(),
+                    obj.getEmail(),
+                    obj.getObservation(),
+                    obj.getRegistrationDate().toString(),};
                 modelo.addRow(linha);
             }
 
@@ -241,7 +253,7 @@ public class index extends javax.swing.JFrame {
 
                 try {
                     //Exclui do BD
-                    productDAO dao = new productDAO();
+                    clientDAO dao = new clientDAO();
                     dao.excluir(id);
 
                     //Remove linha da tabela

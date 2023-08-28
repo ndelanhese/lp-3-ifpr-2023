@@ -4,9 +4,9 @@ import views.product.*;
 import views.productCategory.*;
 import views.usersGroup.*;
 import views.users.*;
-import DAO.productDAO;
+import DAO.clientDAO;
 import javax.swing.JOptionPane;
-import models.product;
+import models.client;
 
 public class update extends javax.swing.JFrame {
 
@@ -37,7 +37,15 @@ public class update extends javax.swing.JFrame {
         jTextFieldID = new javax.swing.JTextField();
         jButtonSalvarDadosGerais = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        txtUnitOfMeasure = new javax.swing.JTextField();
+        cbxClientType = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        txtCpfCnpj = new javax.swing.JTextField();
+        txtPhone = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        txtEmail = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        txtObservation = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Usuário Alterar");
@@ -65,13 +73,17 @@ public class update extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setText("Unidade de medida: ");
+        jLabel4.setText("Tipo de Cliente: ");
 
-        txtUnitOfMeasure.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUnitOfMeasureActionPerformed(evt);
-            }
-        });
+        cbxClientType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pessoa Fisica", "Pessoa Juridica" }));
+
+        jLabel5.setText("CPF/CNPJ:");
+
+        jLabel6.setText("Telefone:");
+
+        jLabel7.setText("Email:");
+
+        jLabel8.setText("Observacao:");
 
         javax.swing.GroupLayout jPanelDadosGeraisLayout = new javax.swing.GroupLayout(jPanelDadosGerais);
         jPanelDadosGerais.setLayout(jPanelDadosGeraisLayout);
@@ -92,27 +104,54 @@ public class update extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButtonSalvarDadosGerais))
                     .addGroup(jPanelDadosGeraisLayout.createSequentialGroup()
-                        .addComponent(jLabel4)
+                        .addGroup(jPanelDadosGeraisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8))
                         .addGap(18, 18, 18)
-                        .addComponent(txtUnitOfMeasure)))
+                        .addGroup(jPanelDadosGeraisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbxClientType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtCpfCnpj)
+                            .addComponent(txtPhone)
+                            .addComponent(txtEmail)
+                            .addComponent(txtObservation))))
                 .addContainerGap())
         );
         jPanelDadosGeraisLayout.setVerticalGroup(
             jPanelDadosGeraisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelDadosGeraisLayout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addGroup(jPanelDadosGeraisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanelDadosGeraisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                .addGroup(jPanelDadosGeraisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelDadosGeraisLayout.createSequentialGroup()
+                        .addGroup(jPanelDadosGeraisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanelDadosGeraisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel4))
+                    .addComponent(cbxClientType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanelDadosGeraisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtUnitOfMeasure, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtCpfCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanelDadosGeraisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanelDadosGeraisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanelDadosGeraisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(txtObservation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addComponent(jButtonSalvarDadosGerais)
                 .addContainerGap())
         );
@@ -152,7 +191,11 @@ public class update extends javax.swing.JFrame {
         } else {
             jTextFieldID.setText("");
             jTextFieldNome.setText("");
-            txtUnitOfMeasure.setText("");
+            txtCpfCnpj.setText("");
+            cbxClientType.setSelectedIndex(0);
+            txtEmail.setText("");
+            txtObservation.setText("");
+            txtPhone.setText("");
         }
     }//GEN-LAST:event_jTextFieldIDFocusLost
 
@@ -160,26 +203,38 @@ public class update extends javax.swing.JFrame {
         try {
             Integer id = Integer.parseInt(idTexto);
 
-            productDAO dao = new productDAO();
-            product obj = dao.getUsuario(id);
+            clientDAO dao = new clientDAO();
+            client obj = dao.getUsuario(id);
 
             if (obj != null) {
                 //Preenche os dados do formulário
                 jTextFieldID.setText(obj.getId().toString());
                 jTextFieldNome.setText(obj.getName());
-                txtUnitOfMeasure.setText(obj.getUnitOfMeasure());
+                cbxClientType.setSelectedIndex(obj.getClientType() - 1);
+                txtCpfCnpj.setText(obj.getCpfCnpj());
+                txtPhone.setText(obj.getPhone());
+                txtEmail.setText(obj.getEmail());
+                txtObservation.setText(obj.getObservation());
             } else {
                 JOptionPane.showMessageDialog(this, "Registro não encontrado.");
                 jTextFieldID.setText("");
                 jTextFieldNome.setText("");
-                txtUnitOfMeasure.setText("");
+                cbxClientType.setSelectedIndex(1);
+                txtCpfCnpj.setText("");
+                txtPhone.setText("");
+                txtEmail.setText("");
+                txtObservation.setText("");
                 jTextFieldID.requestFocus();
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Erro ao consultar registro.");
             jTextFieldID.setText("");
             jTextFieldNome.setText("");
-            txtUnitOfMeasure.setText("");
+            cbxClientType.setSelectedIndex(1);
+            txtCpfCnpj.setText("");
+            txtPhone.setText("");
+            txtEmail.setText("");
+            txtObservation.setText("");
             jTextFieldID.requestFocus();
         }
     }
@@ -191,23 +246,42 @@ public class update extends javax.swing.JFrame {
 
         Integer id = Integer.valueOf(jTextFieldID.getText());
         String nome = jTextFieldNome.getText();
-        String unitOfMeasure = txtUnitOfMeasure.getText();
+        Integer typeClient = cbxClientType.getSelectedIndex() + 1;
+        String cpfCnpj = txtCpfCnpj.getText();
+        String phone = txtPhone.getText();
+        String email = txtEmail.getText();
+        String observation = txtObservation.getText();
 
+        //Validações
         if (nome.equals("")) {
             JOptionPane.showMessageDialog(this, "Informe o nome.");
             jTextFieldNome.requestFocus();
             return;
         }
-        if (unitOfMeasure.equals("")) {
-            JOptionPane.showMessageDialog(this, "Informe a unidade de medida.");
-            txtUnitOfMeasure.requestFocus();
+        if (cpfCnpj.equals("")) {
+            JOptionPane.showMessageDialog(this, "Informe o CPF/CNPJ.");
+            txtCpfCnpj.requestFocus();
             return;
         }
-
-        product u = new product(id, nome, unitOfMeasure);
+        if (phone.equals("")) {
+            JOptionPane.showMessageDialog(this, "Informe o telefone.");
+            txtPhone.requestFocus();
+            return;
+        }
+        if (email.equals("")) {
+            JOptionPane.showMessageDialog(this, "Informe o email.");
+            txtEmail.requestFocus();
+            return;
+        }
+        if (observation.equals("")) {
+            JOptionPane.showMessageDialog(this, "Informe a observação.");
+            txtObservation.requestFocus();
+            return;
+        }
+        client u = new client(null, nome, typeClient, cpfCnpj, phone, email, observation);
 
         try {
-            productDAO dao = new productDAO();
+            clientDAO dao = new clientDAO();
             dao.atualizar(u);
 
             usuarioGerenciarForm.callback();
@@ -218,10 +292,6 @@ public class update extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jButtonSalvarDadosGeraisActionPerformed
-
-    private void txtUnitOfMeasureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUnitOfMeasureActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtUnitOfMeasureActionPerformed
 
     /**
      * @param args the command line arguments
@@ -290,15 +360,23 @@ public class update extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cbxClientType;
     private javax.swing.JButton jButtonSalvarDadosGerais;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanelDadosGerais;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextFieldID;
     private javax.swing.JTextField jTextFieldNome;
-    private javax.swing.JTextField txtUnitOfMeasure;
+    private javax.swing.JTextField txtCpfCnpj;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtObservation;
+    private javax.swing.JTextField txtPhone;
     // End of variables declaration//GEN-END:variables
 }

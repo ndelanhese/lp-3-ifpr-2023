@@ -15,7 +15,7 @@ public class clientDAO {
     public int inserir(client u) throws Exception {
         int retorno;
 
-        String sql = "insert into client (name, clientType, cpfcnpj, phone, email, observation, creation_date)"
+        String sql = "insert into client (name, clientType, cpfcnpj, phone, email, observation, registrationDate)"
                 + "values (?, ?, ?, ?, ?, ?, ?)";
 
         Connection conexao = connection.getConexao();
@@ -69,7 +69,7 @@ public class clientDAO {
                     u.setPhone(rs.getString("phone"));
                     u.setEmail(rs.getString("email"));
                     u.setObservation(rs.getString("observation"));
-                    u.setRegistrationDate(rs.getDate("creation_date"));
+                    u.setRegistrationDate(rs.getDate("registrationDate"));
 
                     lista.add(u);
                 }
@@ -101,7 +101,7 @@ public class clientDAO {
                     obj.setPhone(rs.getString("phone"));
                     obj.setEmail(rs.getString("email"));
                     obj.setObservation(rs.getString("observation"));
-                    obj.setRegistrationDate(rs.getDate("creation_date"));
+                    obj.setRegistrationDate(rs.getDate("registrationDate"));
                 }
             }
         } catch (Exception e) {
