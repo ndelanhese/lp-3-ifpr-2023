@@ -285,6 +285,17 @@ public class update extends javax.swing.JFrame {
         String email = jTextFieldEmail.getText();
         Integer status = cbxStatus.getSelectedIndex() + 1;
 
+        if (nome.equals("")) {
+            JOptionPane.showMessageDialog(this, "Informe o nome.");
+            jTextFieldNome.requestFocus();
+            return;
+        }
+        if (email.equals("")) {
+            JOptionPane.showMessageDialog(this, "Informe o email.");
+            jTextFieldEmail.requestFocus();
+            return;
+        }
+
         user u = new user(id, nome, email, null);
         u.setStatus(status);
 

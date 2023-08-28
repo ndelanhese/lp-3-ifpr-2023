@@ -171,7 +171,12 @@ public class update extends javax.swing.JFrame {
 
         Integer id = Integer.valueOf(jTextFieldID.getText());
         String nome = jTextFieldNome.getText();
-    
+
+        if (nome.equals("")) {
+            JOptionPane.showMessageDialog(this, "Informe o nome.");
+            jTextFieldNome.requestFocus();
+            return;
+        }
 
         productCategory u = new productCategory(id, nome);
 
