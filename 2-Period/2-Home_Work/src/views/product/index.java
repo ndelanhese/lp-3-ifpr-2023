@@ -218,6 +218,8 @@ public class index extends javax.swing.JFrame {
                 String[] linha = {
                     obj.getId().toString(),
                     obj.getName(),
+                    obj.getUnitOfMeasure(),
+                    obj.getRegistrationDate().toString()
                 };
                 modelo.addRow(linha);
             }
