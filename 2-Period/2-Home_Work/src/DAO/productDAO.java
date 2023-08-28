@@ -15,7 +15,7 @@ public class productDAO {
     public int inserir(product u) throws Exception {
         int retorno;
 
-        String sql = "insert into product (name, unitOfMeasure, creation_date)"
+        String sql = "insert into product (name, unitOfMeasure, registrationDate)"
                 + "values (?, ?, ?)";
 
         Connection conexao = connection.getConexao();
@@ -61,7 +61,7 @@ public class productDAO {
                     u.setId(rs.getInt("id"));
                     u.setName(rs.getString("name"));
                     u.setUnitOfMeasure(rs.getString("unitOfMeasure"));
-                    u.setRegistrationDate(rs.getDate("creation_date"));
+                    u.setRegistrationDate(rs.getDate("registrationDate"));
 
                     lista.add(u);
                 }
@@ -89,7 +89,7 @@ public class productDAO {
                     obj.setId(rs.getInt("id"));
                     obj.setName(rs.getString("name"));
                     obj.setUnitOfMeasure(rs.getString("unitOfMeasure"));
-                    obj.setRegistrationDate(rs.getDate("creation_date"));
+                    obj.setRegistrationDate(rs.getDate("registrationDate"));
                 }
             }
         } catch (Exception e) {
