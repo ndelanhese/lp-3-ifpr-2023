@@ -52,7 +52,7 @@ public class update extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Alterar Produto");
+        jLabel1.setText("Alterar Cliente");
 
         jLabel2.setText("ID:");
 
@@ -278,8 +278,7 @@ public class update extends javax.swing.JFrame {
             txtObservation.requestFocus();
             return;
         }
-        client u = new client(null, nome, typeClient, cpfCnpj, phone, email, observation);
-
+        client u = new client(id, nome, typeClient, cpfCnpj, phone, email, observation);
         try {
             clientDAO dao = new clientDAO();
             dao.atualizar(u);

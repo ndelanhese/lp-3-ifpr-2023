@@ -47,7 +47,7 @@ CREATE TABLE client (
   cpfcnpj varchar(15) NOT NULL,
   phone varchar(20),
   email varchar(100),
-  observation text,
+  observation varchar(255),
   registrationDate datetime DEFAULT current_timestamp,
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

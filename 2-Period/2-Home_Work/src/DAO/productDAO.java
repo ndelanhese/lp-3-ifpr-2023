@@ -103,9 +103,9 @@ public class productDAO {
         int retorno;
 
         String sql = "update product"
-                + "      set name  = ?,"
-                + "      set unitOfMeasure  = ?"
-                + "    where id    = ?";
+                + "      set name = ?,"
+                + "          unitOfMeasure = ?"
+                + "   where id = ?";
 
         Connection conexao = connection.getConexao();
         try (PreparedStatement ps = conexao.prepareStatement(sql)) {

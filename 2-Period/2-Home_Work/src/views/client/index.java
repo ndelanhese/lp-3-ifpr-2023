@@ -1,9 +1,5 @@
 package views.client;
 
-import views.product.*;
-import views.productCategory.*;
-import views.usersGroup.*;
-import views.users.*;
 import DAO.clientDAO;
 import java.util.List;
 import javax.swing.JOptionPane;

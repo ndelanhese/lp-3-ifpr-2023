@@ -115,13 +115,13 @@ public class clientDAO {
         int retorno;
 
         String sql = "update client"
-                + "      set name  = ?,"
-                + "      set clientType  = ?,"
-                + "      set cpfcnpj  = ?,"
-                + "      set phone  = ?,"
-                + "      set email  = ?,"
-                + "      set observation  = ?"
-                + "    where id    = ?";
+                + "      set name = ?,"
+                + "          clientType = ?,"
+                + "          cpfcnpj = ?,"
+                + "          phone = ?,"
+                + "          email = ?,"
+                + "          observation = ?"
+                + "   where id = ?";
 
         Connection conexao = connection.getConexao();
         try (PreparedStatement ps = conexao.prepareStatement(sql)) {
@@ -132,10 +132,9 @@ public class clientDAO {
             ps.setString(5, u.getEmail());
             ps.setString(6, u.getObservation());
             ps.setInt(7, u.getId());
-
+            
             retorno = ps.executeUpdate();
         }
-
         return retorno;
     }
 
