@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import models.user;
 
-
 /**
  *
  * @author Marcelo Rafael Borth
@@ -14,14 +13,10 @@ import models.user;
 public class userDAO {
 
     public int inserir(user u) throws Exception {
-        int retorno;
-
         String sql = "insert into user (name, email, password, creation_date, status, usergroup_id)"
                 + "values (?, ?, ?, ?, ?, ?)";
 
-        Connection conexao = connection.getConexao();
-        try (PreparedStatement ps = conexao.prepareStatement(sql)) {
-
+        try (Connection conexao = connection.getConexao(); PreparedStatement ps = conexao.prepareStatement(sql)) {
             java.util.Date registrationDate = u.getDateRegistration();
             if (registrationDate == null) {
                 registrationDate = new java.util.Date();
@@ -36,10 +31,8 @@ public class userDAO {
             ps.setInt(5, u.getStatus());
             ps.setInt(6, u.getGroupFromUser().getId());
 
-            retorno = ps.executeUpdate();
+            return ps.executeUpdate();
         }
-
-        return retorno;
     }
 
     public List<user> buscar(String nome) throws Exception {
