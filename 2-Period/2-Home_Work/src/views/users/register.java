@@ -1,22 +1,28 @@
 package views.users;
 
 import DAO.userDAO;
+import DAO.userGroupDAO;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import models.user;
+import models.userGroup;
 
 /**
  *
  * @author Marcelo Borth
  */
 public class register extends javax.swing.JFrame {
-    
+
     public index usuarioGerenciarForm;
-    
+    public List<userGroup> userGroupsList;
+
     /**
      * Creates new form UsuarioCadastrar
      */
     public register() {
         initComponents();
+        insertDataOnSelect();
     }
 
     /**
@@ -39,6 +45,8 @@ public class register extends javax.swing.JFrame {
         jButtonLimpar = new javax.swing.JButton();
         jPasswordFieldSenha = new javax.swing.JPasswordField();
         jPasswordFieldConfirmacao = new javax.swing.JPasswordField();
+        jLabel6 = new javax.swing.JLabel();
+        groupSelect = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Usuário");
@@ -70,6 +78,14 @@ public class register extends javax.swing.JFrame {
         jButtonLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/limpar.png"))); // NOI18N
         jButtonLimpar.setText("Limpar");
 
+        jLabel6.setText("Grupo:");
+
+        groupSelect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                groupSelectActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -77,29 +93,31 @@ public class register extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldNome, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextFieldEmail, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 98, Short.MAX_VALUE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPasswordFieldSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPasswordFieldConfirmacao, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jPasswordFieldSenha)
+                            .addComponent(jPasswordFieldConfirmacao)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButtonCadastrar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonLimpar)))
+                        .addComponent(jButtonLimpar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel6)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldNome, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTextFieldEmail, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(groupSelect, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -115,32 +133,47 @@ public class register extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(groupSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jPasswordFieldSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jPasswordFieldConfirmacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCadastrar)
                     .addComponent(jButtonLimpar))
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addGap(24, 24, 24))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private userGroup findSelectedGroup(String selectedItem) {
+        for (userGroup userGroupItem : userGroupsList) {
+            if (userGroupItem.getName().equalsIgnoreCase(selectedItem)) {
+                return userGroupItem;
+            }
+        }
+        return null;
+    }
+
     private void jButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrarActionPerformed
-        
+
         String nome = jTextFieldNome.getText();
         String email = jTextFieldEmail.getText();
         String senha = new String(jPasswordFieldSenha.getPassword());
         String confirmacao = new String(jPasswordFieldConfirmacao.getPassword());
-        
+        String groupSelected = groupSelect.getSelectedItem().toString();
+        userGroup selectedGroup = findSelectedGroup(groupSelected);
+
         //Validações
         if (nome.equals("")) {
             JOptionPane.showMessageDialog(this, "Informe o nome.");
@@ -169,21 +202,48 @@ public class register extends javax.swing.JFrame {
             jPasswordFieldSenha.requestFocus();
             return;
         }
+        if (groupSelect.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(this, "Selecione o grupo do usuario");
+            groupSelect.requestFocus();
+            return;
+        }
         //Verificar se email é válido
-        
-        user u = new user(null, nome, email, senha);
-        
+
+        user user = new user(null, nome, email, senha, selectedGroup);
+
         try {
             userDAO dao = new userDAO();
-            dao.inserir(u);
-            
+            dao.inserir(user);
+
             usuarioGerenciarForm.callback();
             JOptionPane.showMessageDialog(this, "Registro inserido com sucesso.");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
         }
-        
+
     }//GEN-LAST:event_jButtonCadastrarActionPerformed
+
+    private void groupSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_groupSelectActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_groupSelectActionPerformed
+
+    private void insertDataOnSelect() {
+        try {
+            DefaultComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>();
+            userGroupDAO userGroupDAO = new userGroupDAO();
+
+            userGroupsList = userGroupDAO.findAll();
+
+            comboBoxModel.addElement("Selecionar");
+            for (userGroup userGroup : userGroupsList) {
+                comboBoxModel.addElement(userGroup.getName());
+            }
+
+            groupSelect.setModel(comboBoxModel);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -222,6 +282,7 @@ public class register extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> groupSelect;
     private javax.swing.JButton jButtonCadastrar;
     private javax.swing.JButton jButtonLimpar;
     private javax.swing.JLabel jLabel1;
@@ -229,6 +290,7 @@ public class register extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPasswordField jPasswordFieldConfirmacao;
     private javax.swing.JPasswordField jPasswordFieldSenha;
     private javax.swing.JTextField jTextFieldEmail;

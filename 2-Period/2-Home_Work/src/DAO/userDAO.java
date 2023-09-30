@@ -16,8 +16,8 @@ public class userDAO {
     public int inserir(user u) throws Exception {
         int retorno;
 
-        String sql = "insert into user (name, email, password, creation_date, status)"
-                + "values (?, ?, ?, ?, ?)";
+        String sql = "insert into user (name, email, password, creation_date, status, usergroup_id)"
+                + "values (?, ?, ?, ?, ?, ?)";
 
         Connection conexao = connection.getConexao();
         try (PreparedStatement ps = conexao.prepareStatement(sql)) {
@@ -34,6 +34,7 @@ public class userDAO {
             ps.setString(3, u.getSenha());
             ps.setDate(4, sqlDate);
             ps.setInt(5, u.getStatus());
+            ps.setInt(6, u.getGroupFromUser().getId());
 
             retorno = ps.executeUpdate();
         }

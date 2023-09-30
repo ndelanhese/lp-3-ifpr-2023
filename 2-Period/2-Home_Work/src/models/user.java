@@ -3,25 +3,27 @@ package models;
 import java.util.Date;
 
 public class user {
-    
+
     private Integer id;
     private String nome;
     private String email;
     private String senha;
     private Date dateRegistration;
     private Integer status;
+    private userGroup groupFromUser;
 
     public user() {
     }
 
-    public user(Integer id, String nome, String email, String senha) {
+    public user(Integer id, String nome, String email, String senha, userGroup groupFromUser) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
         this.status = 1;
+        this.groupFromUser = groupFromUser;
     }
-    
+
     public Integer getId() {
         return id;
     }
@@ -69,6 +71,13 @@ public class user {
     public void setStatus(Integer status) {
         this.status = status;
     }
-    
-    
+
+    public userGroup getGroupFromUser() {
+        return groupFromUser;
+    }
+
+    public void setGroupFromUser(userGroup groupFromUser) {
+        this.groupFromUser = groupFromUser;
+    }
+
 }

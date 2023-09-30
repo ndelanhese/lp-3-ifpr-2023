@@ -115,4 +115,27 @@ public class userGroupDAO {
         }
     }
 
+    public ArrayList<userGroup> findAll() throws Exception {
+        String query = "select * from usergroup order by name";
+
+        ArrayList<userGroup> userGroups = new ArrayList<>();
+
+       try (Connection con = connection.getConexao();
+         PreparedStatement ps = con.prepareStatement(query);
+         ResultSet resultSet = ps.executeQuery()) {
+
+        while (resultSet.next()) {
+            userGroup groupFromUser = new userGroup();
+            groupFromUser.setId(resultSet.getInt("id"));
+            groupFromUser.setName(resultSet.getString("name"));
+            userGroups.add(groupFromUser);
+        }
+
+    } catch (Exception e) {
+            throw e;
+        }
+
+        return userGroups;
+    }
+
 }
