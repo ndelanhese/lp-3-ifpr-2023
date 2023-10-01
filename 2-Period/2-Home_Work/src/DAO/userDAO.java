@@ -4,6 +4,7 @@ import controller.connection;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import models.user;
 
 /**
@@ -13,10 +14,12 @@ import models.user;
 public class userDAO {
 
     public int inserir(user u) throws Exception {
+        Connection con = connection.getConexao();
         String sql = "insert into user (name, email, password, creation_date, status, usergroup_id)"
                 + "values (?, ?, ?, ?, ?, ?)";
 
-        try (Connection conexao = connection.getConexao(); PreparedStatement ps = conexao.prepareStatement(sql)) {
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+
             java.util.Date registrationDate = u.getDateRegistration();
             if (registrationDate == null) {
                 registrationDate = new java.util.Date();
@@ -24,12 +27,15 @@ public class userDAO {
 
             Date sqlDate = new Date(registrationDate.getTime());
 
+            int groupId = u.getGroupFromUser().getId();
+
             ps.setString(1, u.getNome());
             ps.setString(2, u.getEmail());
             ps.setString(3, u.getSenha());
             ps.setDate(4, sqlDate);
             ps.setInt(5, u.getStatus());
-            ps.setInt(6, u.getGroupFromUser().getId());
+            ps.setInt(6, groupId);
+
 
             return ps.executeUpdate();
         }
