@@ -7,6 +7,7 @@ CREATE TABLE user (
   email varchar(100) NOT NULL,
   password varchar(255) NOT NULL,
   creation_date datetime NOT NULL DEFAULT current_timestamp(),
+  usergroup_id int(11),
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

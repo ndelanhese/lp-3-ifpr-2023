@@ -23,7 +23,6 @@ public class update extends javax.swing.JFrame {
     public update() {
         initComponents();
         insertDataOnSelect();
-
     }
 
     /**
@@ -273,14 +272,16 @@ public class update extends javax.swing.JFrame {
             Integer id = Integer.parseInt(idTexto);
 
             userDAO dao = new userDAO();
-            user obj = dao.getUsuario(id);
+            user userData = dao.getUsuario(id);
 
-            if (obj != null) {
+            if (userData != null) {
                 //Preenche os dados do formulário
-                jTextFieldID.setText(obj.getId().toString());
-                jTextFieldNome.setText(obj.getNome());
-                jTextFieldEmail.setText(obj.getEmail());
-                cbxStatus.setSelectedIndex(obj.getStatus() - 1);
+                jTextFieldID.setText(userData.getId().toString());
+                jTextFieldNome.setText(userData.getNome());
+                jTextFieldEmail.setText(userData.getEmail());
+                cbxStatus.setSelectedIndex(userData.getStatus() - 1);
+                groupSelect.setSelectedItem(userData.getGroupFromUser());
+
             } else {
                 JOptionPane.showMessageDialog(this, "Registro não encontrado.");
                 jTextFieldID.setText("");
@@ -298,8 +299,8 @@ public class update extends javax.swing.JFrame {
             jTextFieldID.requestFocus();
         }
     }
-    
-     private userGroup findSelectedGroup(String selectedItem) {
+
+    private userGroup findSelectedGroup(String selectedItem) {
         for (userGroup userGroupItem : userGroupsList) {
             if (userGroupItem.getName().equalsIgnoreCase(selectedItem)) {
                 return userGroupItem;
@@ -309,9 +310,6 @@ public class update extends javax.swing.JFrame {
     }
 
     private void jButtonSalvarDadosGeraisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarDadosGeraisActionPerformed
-        //Validações
-        // - Campos obrigatórios
-        // - Email correto
 
         Integer id = Integer.valueOf(jTextFieldID.getText());
         String nome = jTextFieldNome.getText();
@@ -331,12 +329,12 @@ public class update extends javax.swing.JFrame {
             return;
         }
 
-        user u = new user(id, nome, email, null, selectedGroup);
-        u.setStatus(status);
+        user userData = new user(id, nome, email, null, selectedGroup);
+        userData.setStatus(status);
 
         try {
             userDAO dao = new userDAO();
-            dao.atualizar(u);
+            dao.atualizar(userData);
 
             usuarioGerenciarForm.callback();
 
@@ -368,6 +366,7 @@ public class update extends javax.swing.JFrame {
             }
 
             groupSelect.setModel(comboBoxModel);
+
         } catch (Exception ex) {
             ex.printStackTrace();
         }

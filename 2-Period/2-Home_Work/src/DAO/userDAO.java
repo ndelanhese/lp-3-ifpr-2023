@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import models.user;
+import models.userGroup;
 
 /**
  *
@@ -41,7 +42,6 @@ public class userDAO {
             ps.setDate(4, sqlDate);
             ps.setInt(5, userData.getStatus());
             ps.setInt(6, groupId);
-
 
             return ps.executeUpdate();
         }
@@ -85,7 +85,7 @@ public class userDAO {
         Connection conexao = connection.getConexao();
         String sql = "select * from user where id = ?";
 
-        user obj = null;
+        user userData = null;
 
         try (PreparedStatement ps = conexao.prepareStatement(sql)) {
             //Parâmetros da SQL (pode ser mais de 1 param)
@@ -93,18 +93,26 @@ public class userDAO {
 
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    obj = new user();
-                    obj.setId(rs.getInt("id"));
-                    obj.setNome(rs.getString("name"));
-                    obj.setEmail(rs.getString("email"));
-                    obj.setDateRegistration(rs.getDate("creation_date"));
-                    obj.setStatus(rs.getInt("status"));
+                    userData = new user();
+                    userData.setId(rs.getInt("id"));
+                    userData.setNome(rs.getString("name"));
+                    userData.setEmail(rs.getString("email"));
+                    userData.setDateRegistration(rs.getDate("creation_date"));
+                    userData.setStatus(rs.getInt("status"));
+
+                    Integer userGroupId = rs.getInt("usergroup_id");
+
+                    if (userGroupId != null && userGroupId > 0) {
+                        userGroup userGroupData = getUserGroupById(userGroupId);
+                        userData.setGroupFromUser(userGroupData);
+                    }
+
                 }
             }
         } catch (Exception e) {
             throw e;
         }
-        return obj;
+        return userData;
     }
 
     public int atualizar(user userData) throws Exception {
@@ -128,7 +136,6 @@ public class userDAO {
             retorno = ps.executeUpdate();
         }
 
-
         return retorno;
     }
 
@@ -143,6 +150,30 @@ public class userDAO {
         } catch (Exception e) {
             throw e;
         }
+    }
+
+    public userGroup getUserGroupById(Integer id) throws Exception {
+        String query = "select * from usergroup where id = ?";
+
+        userGroup userGroupData = null;
+
+        Connection con = connection.getConexao();
+
+        try (PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setInt(1, id);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    userGroupData = new userGroup();
+                    userGroupData.setId(rs.getInt("id"));
+                    userGroupData.setName(rs.getString("name"));
+
+                }
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+        return userGroupData;
     }
 
 }
