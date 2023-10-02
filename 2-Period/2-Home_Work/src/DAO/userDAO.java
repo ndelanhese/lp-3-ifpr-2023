@@ -13,27 +13,33 @@ import models.user;
  */
 public class userDAO {
 
-    public int inserir(user u) throws Exception {
-        Connection con = connection.getConexao();
-        String sql = "insert into user (name, email, password, creation_date, status, usergroup_id)"
+    public int inserir(user userData) throws Exception {
+
+        String sql = "insert into user (name, email, password, creation_date, status, usergroup_id) "
                 + "values (?, ?, ?, ?, ?, ?)";
+
+        Connection con = connection.getConexao();
+
+        if (con.isClosed()) {
+            throw new Exception("Connection is closed");
+        }
 
         try (PreparedStatement ps = con.prepareStatement(sql)) {
 
-            java.util.Date registrationDate = u.getDateRegistration();
+            java.util.Date registrationDate = userData.getDateRegistration();
             if (registrationDate == null) {
                 registrationDate = new java.util.Date();
             }
 
             Date sqlDate = new Date(registrationDate.getTime());
 
-            int groupId = u.getGroupFromUser().getId();
+            int groupId = userData.getGroupFromUser().getId();
 
-            ps.setString(1, u.getNome());
-            ps.setString(2, u.getEmail());
-            ps.setString(3, u.getSenha());
+            ps.setString(1, userData.getNome());
+            ps.setString(2, userData.getEmail());
+            ps.setString(3, userData.getSenha());
             ps.setDate(4, sqlDate);
-            ps.setInt(5, u.getStatus());
+            ps.setInt(5, userData.getStatus());
             ps.setInt(6, groupId);
 
 
@@ -72,7 +78,6 @@ public class userDAO {
         } catch (Exception e) {
             throw e;
         }
-
         return lista;
     }
 
@@ -99,28 +104,30 @@ public class userDAO {
         } catch (Exception e) {
             throw e;
         }
-
         return obj;
     }
 
-    public int atualizar(user u) throws Exception {
+    public int atualizar(user userData) throws Exception {
         int retorno;
 
         String sql = "update user"
                 + "      set name  = ?,"
                 + "          email = ?,"
-                + "          status = ?"
+                + "          status = ?,"
+                + "          usergroup_id = ?"
                 + "    where id    = ?";
 
         Connection conexao = connection.getConexao();
         try (PreparedStatement ps = conexao.prepareStatement(sql)) {
-            ps.setString(1, u.getNome());
-            ps.setString(2, u.getEmail());
-            ps.setInt(3, u.getStatus());
-            ps.setInt(4, u.getId());
+            ps.setString(1, userData.getNome());
+            ps.setString(2, userData.getEmail());
+            ps.setInt(3, userData.getStatus());
+            ps.setInt(4, userData.getGroupFromUser().getId());
+            ps.setInt(5, userData.getId());
 
             retorno = ps.executeUpdate();
         }
+
 
         return retorno;
     }

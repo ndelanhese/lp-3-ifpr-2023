@@ -207,7 +207,6 @@ public class register extends javax.swing.JFrame {
             groupSelect.requestFocus();
             return;
         }
-        //Verificar se email é válido
 
         user user = new user(null, nome, email, senha, selectedGroup);
 
